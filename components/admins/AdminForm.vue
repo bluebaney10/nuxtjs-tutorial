@@ -32,14 +32,23 @@
 export default {
     data() {
         return {
-            form:{
+            form:this.post?{...this.post} :
+            {
                 title:"",
                 content:"",
                 image:"",
                 author:""
             }
         }
-    },methods:{
+    },
+    props:{
+        post:{
+            type:Object,
+            required:false
+
+        }
+    },
+    methods:{
         onSubmit(evt){
             this.$emit('sendData',this.form)
             this.$router.push('/admins/posts')

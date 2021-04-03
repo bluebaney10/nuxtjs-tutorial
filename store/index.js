@@ -14,6 +14,12 @@
             },
             addPostState(state,post){
                 state.loadData.push(post)
+            },
+            editPostState(state,editpost){
+                const postIndex=state.loadData.findIndex(
+                    post=>post.id===editpost.id
+                )
+                state.loadData[postIndex]=editpost
             }
         },
         actions:{
@@ -35,6 +41,14 @@
                 post("https://nuxt-tutorial-f0c0f-default-rtdb.firebaseio.com/posts.json",cratePost)
                 .then(res=>{
                   vuexContext.commit("addPostState",{...cratePost,id:res.data.name})
+                })
+            },
+            editPost(vuexContext,post){
+                return axios.
+                put("https://nuxt-tutorial-f0c0f-default-rtdb.firebaseio.com/posts/"+post.id+".json",post)
+                .then(res=>{
+                    //commit mutation
+                    vuexContext.commit("editePostState",post)
                 })
             }
         },

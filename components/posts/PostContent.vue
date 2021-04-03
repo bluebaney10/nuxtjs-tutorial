@@ -10,9 +10,11 @@
     class="mb-2"
   >
     <b-card-text>
-     {{content}}
+     {{content.slice(0,200)+"..."}}
     </b-card-text>
-    <nuxt-link class="btn btn-success" :to="postLink">Read article</nuxt-link>
+    <nuxt-link class="btn btn-success" :to="postLink">
+       {{ isAdmin ? 'edit content' : 'read content'}}
+        </nuxt-link>
 
   </b-card>
 </b-col>
@@ -43,7 +45,7 @@ export default {
     },
     computed:{
         postLink(){
-            return this.isAdmin ? '/admin/post/'+this.id : '/post/'+this.id
+            return this.isAdmin ? '/admins/posts/'+this.id : '/posts/'+this.id
         }
     }
 }
